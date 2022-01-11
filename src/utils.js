@@ -20,8 +20,8 @@ const extName = (file) => {
 }
 
 // Function to get current filenames in directory
-const readDirectoryData = (__dirname, myCallback) => {
-  fs.readdir(__dirname, (err, files) => {
+const readDirectoryData = (directory, myCallback) => {
+  fs.readdir(directory, (err, files) => {
     if (err) throw err;
     myCallback(files);
   })
