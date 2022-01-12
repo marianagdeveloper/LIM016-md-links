@@ -7,9 +7,9 @@ import {
 } from './src/utils.js';
 
 //Read file
-readFileData('README.md', printReadFileData);
+readFileData('./src/some/example.md', printReadFileData);
 function printReadFileData(data) {
-  // console.log(data);
+  console.log(data);
 }
 
 //Ext file
@@ -35,7 +35,28 @@ function printReadDirectoryData(files) {
 }
 
 // Join routes
-console.log(joinRoutes('/home/Laboratoria/', './test'));
+// console.log(joinRoutes('/home/Laboratoria/', './test'));
+
+//md-links
+const mdLinks = require("md-links");
+
+mdLinks("./src/some/example.md")
+  .then(links => {
+    // => [{ href, text, file }, ...]
+  })
+  .catch(console.error);
+
+mdLinks("./src/some/example.md", { validate: true })
+  .then(links => {
+    // => [{ href, text, file, status, ok }, ...]
+  })
+  .catch(console.error);
+
+mdLinks("./src/some/dir")
+  .then(links => {
+    // => [{ href, text, file }, ...]
+  })
+  .catch(console.error);
 
 
 
