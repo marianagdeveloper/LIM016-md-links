@@ -8,6 +8,7 @@
     "test": "test"
   },
   "scripts": {
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +22,8 @@
   },
   "homepage": "https://github.com/marianagdeveloper/LIM016-md-links#readme",
   "dependencies": {
-    "nodemon": "^2.0.15"
+    "jsdom": "^19.0.0",
+    "nodemon": "^2.0.15",
+    "remarkable": "^2.0.1"
   }
 }
