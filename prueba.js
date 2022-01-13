@@ -9,7 +9,7 @@ import {mdLinks} from "./index.js";
 
 // mdLinks("./src/some/example.md", { validate: true })
 //   .then(links => {
-//     console.log('prueba', links);
+//     console.log('prueba:', links);
 //     // => [{ href, text, file, status, ok }, ...]
 //   })
 //   .catch(console.error);
