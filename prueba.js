@@ -30,7 +30,7 @@ import {mdLinks} from "./index.js";
 
 mdLinks("./src/some")
   .then(links => {
-    console.log(links);
+    console.log('Links in Directory:', links);
     // => [{ href, text, file }, ...]
   })
   .catch(console.error);
