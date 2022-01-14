@@ -1,4 +1,5 @@
 import {
+  readDirectoriesRecursive,
   absolutePath,
   absolutePathResolve,
   pathDetails,
@@ -6,8 +7,6 @@ import {
   linksInFile,
   fileConvertedInHTML,
   extMD,
-  readDirectoryData,
-  joinRoutes,
 } from "./src/utils.js";
 
 function fileToLinks(data, routeFileMD) {
@@ -26,9 +25,8 @@ function fileToLinks(data, routeFileMD) {
 
 const mdLinks = (pathData, optionsData) => {
   return new Promise(function (resolve, reject) {
-    let result;
     let arrayPromises = [];
-    let todoPromises;
+    let filePromise;
     let pathResolve = absolutePath(pathData)
       ? pathData
       : absolutePathResolve(pathData);
@@ -45,25 +43,19 @@ const mdLinks = (pathData, optionsData) => {
     }
 
     if (flagContent === "fileMD") {
-      todoPromises = new Promise(function (resolve, reject) {
+      filePromise = new Promise(function (resolve, reject) {
         readFileData(pathResolve, (data) => {
           resolve(fileToLinks(data, pathResolve));
           reject("Error reading MD file");
         });
       });
-      resolve(todoPromises);
+      resolve(filePromise);
     }
 
     if (flagContent === "directory") {
-      readDirectoryData(pathResolve, readDirectory);
-
-      function readDirectory(files) {
-
-
-
+      readDirectoriesRecursive(pathResolve, readAllFilesMD);
+      function readAllFilesMD(files) {
         const conditionFilesMD = files.filter((file) => extMD(file));
-
-
         const existFilesMD =
           conditionFilesMD.length > 0
             ? conditionFilesMD
@@ -71,7 +63,7 @@ const mdLinks = (pathData, optionsData) => {
 
         for (let index = 0; index < existFilesMD.length; index++) {
           const fileMD = existFilesMD[index];
-          const routeFileMD = joinRoutes(pathResolve, fileMD);
+          const routeFileMD = fileMD;
           arrayPromises[index] = new Promise(function (resolve, reject) {
             readFileData(routeFileMD, (data) => {
               resolve(fileToLinks(data, routeFileMD));
@@ -88,7 +80,7 @@ const mdLinks = (pathData, optionsData) => {
           });
           resolve(todoLinks);
         });
-      }
+      };
     }
   });
 };

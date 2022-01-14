@@ -23,6 +23,7 @@
   "homepage": "https://github.com/marianagdeveloper/LIM016-md-links#readme",
   "dependencies": {
     "jsdom": "^19.0.0",
+    "node-dir": "^0.1.17",
     "nodemon": "^2.0.15",
     "remarkable": "^2.0.1"
   }
