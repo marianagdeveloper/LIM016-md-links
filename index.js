@@ -13,14 +13,17 @@ function fileToLinks(data, routeFileMD) {
   const arrayLinks = [];
   const fileHTML = fileConvertedInHTML(data);
   const hrefData = linksInFile(fileHTML);
-  hrefData.forEach((link) => {
-    arrayLinks.push({
-      href: link.href,
-      text: link.textContent,
-      file: routeFileMD,
+  console.log('hrefData', hrefData.length);
+  if (hrefData.length > 0) {
+    hrefData.forEach((link) => {
+      arrayLinks.push({
+        href: link.href,
+        text: link.textContent,
+        file: routeFileMD,
+      });
     });
-  });
-  return arrayLinks.length > 0 ? arrayLinks : "Do not have links";
+  }
+  return arrayLinks;
 }
 
 const mdLinks = (pathData, optionsData) => {
