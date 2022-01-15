@@ -4,12 +4,27 @@ import { JSDOM } from "jsdom";
 import dir from "node-dir";
 import { Remarkable } from "remarkable";
 var md = new Remarkable();
+import fetch from "node-fetch";
+
+// HTTP status
+const statusHttp = (link, callback) => {
+  let status;
+  fetch(link)
+    .then((res) => {
+      status = res.status;
+      callback(status);
+    })
+    .catch(() => {
+      status = 400;
+      callback(status);
+    });
+};
 
 // Reading directory recursive
 const readDirectoriesRecursive = (directory, allFilesMD) => {
-  dir.files(directory,  function (err, files) {
+  dir.files(directory, function (err, files) {
     if (err) throw err;
-    allFilesMD(files.filter((file) => extMD(file)))
+    allFilesMD(files.filter((file) => extMD(file)));
   });
 };
 
@@ -62,4 +77,5 @@ export {
   readFileData,
   linksInFile,
   extMD,
+  statusHttp,
 };

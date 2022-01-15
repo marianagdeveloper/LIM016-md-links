@@ -7,39 +7,85 @@ import {
   linksInFile,
   fileConvertedInHTML,
   extMD,
+  statusHttp,
 } from "./src/utils.js";
 
-function fileToLinks(data, routeFileMD) {
-  const arrayLinks = [];
-  const fileHTML = fileConvertedInHTML(data);
-  const hrefData = linksInFile(fileHTML);
-  console.log('hrefData', hrefData.length);
-  if (hrefData.length > 0) {
-    hrefData.forEach((link) => {
+function linksWithOptionValidate(link, routeFileMD) {
+  return new Promise(function (resolve, reject) {
+    statusHttp(link.href, resultStatusHttp);
+    function resultStatusHttp(statusData) {
+      const arrayLinks = [];
+      const messageOk = (statusData >= 200 && statusData < 300 ) ? 'ok' : 'fail'
       arrayLinks.push({
         href: link.href,
         text: link.textContent,
         file: routeFileMD,
+        status: statusData,
+        ok: messageOk,
       });
-    });
-  }
-  return arrayLinks;
+      resolve(arrayLinks);
+    }
+  });
+}
+
+function fileToLinks(data, routeFileMD, optionsData) {
+  return new Promise (function(resolve, reject) {
+    let promises = [];
+    const arrayLinks = [];
+    const fileHTML = fileConvertedInHTML(data);
+    const hrefData = linksInFile(fileHTML);
+    console.log(hrefData.length);
+    if (hrefData.length > 0 ) {
+      hrefData.forEach((link, index) => {
+
+        if (optionsData.validate == true ) {
+          promises[index] = new Promise (function (resolve, reject) {
+            linksWithOptionValidate(link, routeFileMD).then((result) => {
+              resolve(result)
+            });
+          })
+        }
+        else {
+          arrayLinks.push({
+            href: link.href,
+            text: link.textContent,
+            file: routeFileMD,
+          });
+          return resolve(arrayLinks)
+        }
+      });
+      // Ready foreach
+        Promise.all([...promises]).then((result) => {
+          let todoLinks = [];
+          result.forEach((promise) => {
+            promise.forEach((link) => {
+              todoLinks.push(link);
+            });
+          });
+          resolve(todoLinks);
+      });
+
+    }
+  })
+
 }
 
 const mdLinks = (pathData, optionsData) => {
   return new Promise(function (resolve, reject) {
     let arrayPromises = [];
+    let flagContent = '';
     let filePromise;
     let pathResolve = absolutePath(pathData)
       ? pathData
       : absolutePathResolve(pathData);
     let pathContent = pathDetails(pathResolve);
-    let flagContent =
-      pathContent.ext === ""
+    flagContent = (pathContent.ext === "")
         ? "directory"
         : pathContent.ext === ".md"
         ? "fileMD"
         : "fileNoMD";
+
+        console.log('flagContent::::', flagContent);
 
     if (flagContent === "fileNoMD") {
       reject(console.log("Do not exist MD file"));
@@ -48,7 +94,7 @@ const mdLinks = (pathData, optionsData) => {
     if (flagContent === "fileMD") {
       filePromise = new Promise(function (resolve, reject) {
         readFileData(pathResolve, (data) => {
-          resolve(fileToLinks(data, pathResolve));
+          resolve(fileToLinks(data, pathResolve, optionsData || { validate : false}));
           reject("Error reading MD file");
         });
       });
@@ -69,7 +115,7 @@ const mdLinks = (pathData, optionsData) => {
           const routeFileMD = fileMD;
           arrayPromises[index] = new Promise(function (resolve, reject) {
             readFileData(routeFileMD, (data) => {
-              resolve(fileToLinks(data, routeFileMD));
+              resolve(fileToLinks(data, routeFileMD, optionsData || { validate : false}));
             });
           });
         }
@@ -83,7 +129,7 @@ const mdLinks = (pathData, optionsData) => {
           });
           resolve(todoLinks);
         });
-      };
+      }
     }
   });
 };

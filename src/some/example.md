@@ -1,7 +1,14 @@
 ## 1. Preámbulo
 
-[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
-ligero muy popular entre developers. Es usado en muchísimas plataformas que
-manejan texto plano (GitHub, foros, blogs, ...), y es muy común
-encontrar varios archivos en ese formato en cualquier tipo de repositorio
-(empezando por el tradicional `README.md`).
+* [9. Checklist](#9-checklist)
+* [10. Achicando el problema](#10-achicando-el-problema)
+
+## 10. Achicando el problema
+
+Un "superpoder" que esperamos puedas desarrollar durante el bootcamp
+es el de definir "mini-proyectos" que te acerquen paso a paso a
+la solución del "gran proyecto". Es el equivalente a comenzar armando
+esquinas o bordes del rompecabezas/puzzle sin saber necesariamente
+cómo encajarán al final. Déjate llevar y explora.
+
+Estas son algunas sugerencias:
