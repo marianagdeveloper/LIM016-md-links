@@ -15,7 +15,7 @@ function linksWithOptionValidate(link, routeFileMD) {
     statusHttp(link.href, resultStatusHttp);
     function resultStatusHttp(statusData) {
       const arrayLinks = [];
-      const messageOk = (statusData >= 200 && statusData < 300 ) ? 'ok' : 'fail'
+      const messageOk = statusData >= 200 && statusData < 300 ? "ok" : "fail";
       arrayLinks.push({
         href: link.href,
         text: link.textContent,
@@ -29,76 +29,76 @@ function linksWithOptionValidate(link, routeFileMD) {
 }
 
 function fileToLinks(data, routeFileMD, optionsData) {
-  return new Promise (function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     let promises = [];
     const arrayLinks = [];
     const fileHTML = fileConvertedInHTML(data);
     const hrefData = linksInFile(fileHTML);
-    console.log(hrefData.length);
-    if (hrefData.length > 0 ) {
+    if (hrefData.length > 0) {
       hrefData.forEach((link, index) => {
-
-        if (optionsData.validate == true ) {
-          promises[index] = new Promise (function (resolve, reject) {
+        if (optionsData.validate == true) {
+          promises[index] = new Promise(function (resolve, reject) {
             linksWithOptionValidate(link, routeFileMD).then((result) => {
-              resolve(result)
+              resolve(result);
             });
-          })
-        }
-        else {
+          });
+        } else {
           arrayLinks.push({
             href: link.href,
             text: link.textContent,
             file: routeFileMD,
           });
-          return resolve(arrayLinks)
+          return resolve(arrayLinks);
         }
       });
       // Ready foreach
-        Promise.all([...promises]).then((result) => {
-          let todoLinks = [];
-          result.forEach((promise) => {
-            promise.forEach((link) => {
-              todoLinks.push(link);
-            });
+      Promise.all([...promises]).then((result) => {
+        let todoLinks = [];
+        result.forEach((promise) => {
+          promise.forEach((link) => {
+            todoLinks.push(link);
           });
-          resolve(todoLinks);
+        });
+        resolve(todoLinks);
       });
-
     }
-  })
-
+    if (hrefData.length == 0) {
+      resolve(arrayLinks);
+    }
+  });
 }
 
 const mdLinks = (pathData, optionsData) => {
   return new Promise(function (resolve, reject) {
     let arrayPromises = [];
-    let flagContent = '';
-    let filePromise;
+    let flagContent = "";
     let pathResolve = absolutePath(pathData)
       ? pathData
       : absolutePathResolve(pathData);
     let pathContent = pathDetails(pathResolve);
-    flagContent = (pathContent.ext === "")
+    flagContent =
+      pathContent.ext === ""
         ? "directory"
         : pathContent.ext === ".md"
         ? "fileMD"
         : "fileNoMD";
-
-        console.log('flagContent::::', flagContent);
 
     if (flagContent === "fileNoMD") {
       reject(console.log("Do not exist MD file"));
     }
 
     if (flagContent === "fileMD") {
-      filePromise = new Promise(function (resolve, reject) {
+      const fileLinks = new Promise(function (resolve, reject) {
         readFileData(pathResolve, (data) => {
-          resolve(fileToLinks(data, pathResolve, optionsData || { validate : false}));
+          resolve(
+            fileToLinks(data, pathResolve, optionsData || { validate: false })
+          );
           reject("Error reading MD file");
         });
       });
-      resolve(filePromise);
+      resolve(
+        fileLinks.length > 0 ? fileLinks : "The file does not have links"
+      );
     }
 
     if (flagContent === "directory") {
@@ -115,7 +115,13 @@ const mdLinks = (pathData, optionsData) => {
           const routeFileMD = fileMD;
           arrayPromises[index] = new Promise(function (resolve, reject) {
             readFileData(routeFileMD, (data) => {
-              resolve(fileToLinks(data, routeFileMD, optionsData || { validate : false}));
+              resolve(
+                fileToLinks(
+                  data,
+                  routeFileMD,
+                  optionsData || { validate: false }
+                )
+              );
             });
           });
         }
