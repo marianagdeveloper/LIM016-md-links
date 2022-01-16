@@ -1,22 +1,22 @@
-import { Remarkable } from "remarkable";
 import { readFile } from "fs";
-import { JSDOM } from "jsdom";
-import fetch from "node-fetch";
 import path from "path";
+import { JSDOM } from "jsdom";
 import dir from "node-dir";
+import { Remarkable } from "remarkable";
 var md = new Remarkable();
+import fetch from "node-fetch";
 
 // HTTP status
-const statusHttp = (link, statusData) => {
+const statusHttp = (link, callback) => {
   let status;
   fetch(link)
     .then((res) => {
       status = res.status;
-      statusData(status);
+      callback(status);
     })
     .catch(() => {
       status = 404;
-      statusData(status);
+      callback(status);
     });
 };
 
@@ -56,10 +56,10 @@ const linksInFile = (dataHTML) => {
 };
 
 //Read file
-const readFileData = (url, fileData) => {
+const readFileData = (url, myCallback) => {
   readFile(url, "utf8", (err, data) => {
     if (err) throw err;
-    fileData(data);
+    myCallback(data);
   });
 };
 
