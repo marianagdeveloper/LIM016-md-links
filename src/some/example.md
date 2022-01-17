@@ -2,6 +2,8 @@
 
 * [9. Checklist](#9-checklist)
 * [10. Achicando el problema](#10-achicando-el-problema)
+* [10. Achicando el problema](#10-achicando-el-problema)
+* [10. Achicando el problema](#10-achicando-el-problema)
 
 ## 10. Achicando el problema
 
