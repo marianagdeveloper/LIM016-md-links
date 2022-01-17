@@ -1,9 +1,12 @@
 {
   "name": "md-links",
   "version": "0.1.0",
-  "description": "Markdown",
+  "description": "A command line tool for which reads and parses Markdown files, to verify the links they contain and to report some statistics.",
   "type": "module",
   "main": "index.js",
+  "bin": {
+    "md-links": "./index.js"
+  },
   "keywords": [
     "mdlinks",
     "cli",
@@ -26,6 +29,10 @@
   },
   "homepage": "https://github.com/marianagdeveloper/LIM016-md-links#readme",
   "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^8.3.0",
+    "figlet": "^1.5.2",
+    "inquirer": "^8.2.0",
     "jsdom": "^19.0.0",
     "node-dir": "^0.1.17",
     "node-fetch": "^3.1.0",
