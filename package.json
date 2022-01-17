@@ -1,11 +1,11 @@
 {
-  "name": "md-links",
+  "name": "mg-links",
   "version": "0.1.0",
   "description": "A command line tool for which reads and parses Markdown files, to verify the links they contain and to report some statistics.",
   "type": "module",
   "main": "index.js",
   "bin": {
-    "md-links": "./index.js"
+    "mg-links": "./index.js"
   },
   "keywords": [
     "mdlinks",

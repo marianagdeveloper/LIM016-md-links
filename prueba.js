@@ -2,7 +2,7 @@ import {mdLinks} from "./index.js";
 import chalk from 'chalk';
 import figlet from 'figlet';
 
-figlet('M D - L I N K S', function(err, data) {
+figlet('M G - L I N K S', function(err, data) {
     if (err) {
         console.log('Something went wrong...');
         console.dir(err);
@@ -39,12 +39,12 @@ figlet('M D - L I N K S', function(err, data) {
 //   .catch(console.error);
 
 // ----------------md file whit 2 links
-// mdLinks("./src/some/example2.md", { validate: true })
-//   .then(links => {
-//     console.table(links);
-//     // => [{ href, text, file, status, ok }, ...]
-//   })
-//   .catch(console.error);
+mdLinks("./src/some/example2.md", { validate: true })
+  .then(links => {
+    console.table(links);
+    // => [{ href, text, file, status, ok }, ...]
+  })
+  .catch(console.error);
 
 // // ----------------md file whit one fail link
 // mdLinks("./src/some/some1/example5.md", { validate: true })

@@ -4,10 +4,7 @@ import pkg from "inquirer";
 const { prompt } = pkg;
 const pathInput = process.argv[2];
 
-// console.log('process.argv[2]', process.argv[2]);
-// console.log('process.argv', process.argv);
-
-// Dont't have path, input path and list options for terminal
+// Dont't have path, now receive the path and options for terminal
 if (pathInput == undefined || pathInput == "") {
   const argumentsData = prompt([
     {
@@ -20,15 +17,26 @@ if (pathInput == undefined || pathInput == "") {
       name: "optionsData",
       message: "Options to statistics: ",
       choices: [
-        "none",
-        "Validate Links",
-        "Stats Links",
-        "Validate and Stats Links",
+        "1.- none",
+        "2.- Validate Links",
+        "3.- Stats Links",
+        "4.- Validate and Stats Links",
       ],
     },
   ]);
   argumentsData.then((data) => {
     // Call Cli, arguments: path and options
+    // console.log('data:', data);
+    data.pathData = data.pathData.trim();
+    if (data.optionsData == '1.- none') {
+      data.optionsData =  { 'validate': false}
+    } else if (data.optionsData == '2.- Validate Links') {
+      data.optionsData =  { 'validate': true}
+    } else if (data.optionsData == '3.- Stats Links') {
+      data.optionsData =  { 'stats': true}
+    } else if (data.optionsData == '4.- Validate and Stats Links') {
+      data.optionsData =  { 'stats': true, 'validate': true}
+    }
     cli(data);
   });
 } else {

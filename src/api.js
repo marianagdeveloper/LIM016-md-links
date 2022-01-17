@@ -131,11 +131,9 @@ const mdLinks = (pathData, optionsData) => {
         }
 
         Promise.all([...arrayPromises]).then((resolvePromises) => {
-          // console.log("todo");
           let todoLinks = [];
           resolvePromises.forEach((promise) => {
             promise.forEach((link) => {
-              // console.log("link", link);
               todoLinks.push(link);
             });
           });
