@@ -4,41 +4,12 @@ import { Remarkable } from "remarkable";
 import path from "path";
 import dir from "node-dir";
 import fetch from "node-fetch";
-import chalk from "chalk";
-import figlet from "figlet";
 var md = new Remarkable();
 
 // Uniques Links
 const onlyUnique = (value, index, self) => {
   return self.indexOf(value) === index;
 }
-
-// WARNING: console.log in Yellow
-const logWarning = (consoleLog) => {
-  return console.log(chalk.inverse.yellow(consoleLog))
-}
-
-// RESULTS: console.log in Green
-const logResults = (consoleLog) => {
-  return chalk.inverse.green(consoleLog)
-}
-
-// RESULTS: console.log in Cyan
-const logResultsCyan = (consoleLog) => {
-  return chalk.bold.cyan(consoleLog)
-}
-
-// Print banner
-const printBanner = () => {
-  figlet("M G - L I N K S", function (err, banner) {
-    if (err) {
-      console.log("Something went wrong...");
-      console.dir(err);
-      return;
-    }
-    return console.log(chalk.bold.green(banner));
-  });
-};
 
 // HTTP status
 const statusHttp = (link, callback) => {
@@ -62,12 +33,12 @@ const readDirectoriesRecursive = (directory, allFilesMD) => {
   });
 };
 
-// Absolute route
+// TESTED :Absolute route
 const absolutePath = (pathData) => {
   return path.isAbsolute(pathData);
 };
 
-// Convert in Absolute route
+// TESTED :Convert in Absolute route
 const absolutePathResolve = (pathData) => {
   return path.resolve(pathData);
 };
@@ -90,14 +61,14 @@ const linksInFile = (dataHTML) => {
 };
 
 //Read file
-const readFileData = (url, myCallback) => {
+const readFileData = (url, printFile) => {
   readFile(url, "utf8", (err, data) => {
     if (err) throw err;
-    myCallback(data);
+    printFile(data);
   });
 };
 
-//Ext file ".md"
+// TESTED : Ext file ".md"
 const extMD = (file) => {
   return path.extname(file) == ".md";
 };
@@ -112,9 +83,5 @@ export {
   linksInFile,
   extMD,
   statusHttp,
-  printBanner,
-  logWarning,
   onlyUnique,
-  logResults,
-  logResultsCyan
 };

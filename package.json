@@ -16,13 +16,14 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marianagdeveloper/LIM016-md-links.git"
   },
   "author": "Mariana Guanda",
+  "email": "mariana.guanda@gmail.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/marianagdeveloper/LIM016-md-links/issues"
@@ -33,10 +34,12 @@
     "commander": "^8.3.0",
     "figlet": "^1.5.2",
     "inquirer": "^8.2.0",
+    "jest": "^27.4.7",
     "jsdom": "^19.0.0",
     "node-dir": "^0.1.17",
     "node-fetch": "^3.1.0",
     "nodemon": "^2.0.15",
     "remarkable": "^2.0.1"
-  }
+  },
+  "devDependencies": {}
 }

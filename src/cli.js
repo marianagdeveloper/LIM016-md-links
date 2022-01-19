@@ -1,5 +1,12 @@
 import { mdLinks } from "./api.js";
-import { printBanner, logWarning, onlyUnique, logResults, logResultsCyan } from "./utils.js";
+import { onlyUnique } from "./utils.js";
+import {
+  printBanner,
+  logWarning,
+  logResults,
+  logResultsCyan,
+} from './messages.js'
+
 
 const cli = (data) => {
   // console.log("data recibida en cli:", data);

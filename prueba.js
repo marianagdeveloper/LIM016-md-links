@@ -42,6 +42,7 @@ figlet('M G - L I N K S', function(err, data) {
 mdLinks("./src/some/example2.md", { validate: true })
   .then(links => {
     console.table(links);
+    console.log(links);
     // => [{ href, text, file, status, ok }, ...]
   })
   .catch(console.error);
