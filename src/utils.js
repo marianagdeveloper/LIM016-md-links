@@ -43,7 +43,7 @@ const absolutePathResolve = (pathData) => {
   return path.resolve(pathData);
 };
 
-// Details path
+// TESTED :Details path
 const pathDetails = (pathData) => {
   return path.parse(pathData);
 };
@@ -60,7 +60,7 @@ const linksInFile = (dataHTML) => {
   return hrefData;
 };
 
-//Read file
+// TESTED : Read file
 const readFileData = (url, printFile) => {
   readFile(url, "utf8", (err, data) => {
     if (err) throw err;
@@ -68,10 +68,21 @@ const readFileData = (url, printFile) => {
   });
 };
 
+// PF con Marianao
+// Estrategia para convertir funciones asincronas
+// Incialmente usando callbacks ahora usando promesas
+// Y viceversa podemos convertir promesas en callbacks
+// const readFileDataPromise = (url) => {
+//   return new Promise((reject, resolve) => {
+//     readFile(url, "utf8", (err, data) => {
+//       if (err) reject(err);
+//       resolve(data);
+//     });
+//   })
+// };
+
 // TESTED : Ext file ".md"
-const extMD = (file) => {
-  return path.extname(file) == ".md";
-};
+const extMD = (file) => path.extname(file) == ".md";
 
 export {
   readDirectoriesRecursive,

@@ -4,7 +4,7 @@ import pkg from "inquirer";
 const { prompt } = pkg;
 const pathInput = process.argv[2];
 
-// Dont't have path, now receive the path and options for terminal
+// mg-links: Receive the path and options en 2 steps
 if (pathInput == undefined || pathInput == "") {
   const argumentsData = prompt([
     {
@@ -25,7 +25,6 @@ if (pathInput == undefined || pathInput == "") {
     },
   ]);
   argumentsData.then((data) => {
-    // Call Cli, arguments: path and options
     // console.log('data:', data);
     data.pathData = data.pathData.trim();
     if (data.optionsData == '1.- none') {
@@ -37,17 +36,28 @@ if (pathInput == undefined || pathInput == "") {
     } else if (data.optionsData == '4.- Validate and Stats Links') {
       data.optionsData =  { 'stats': true, 'validate': true}
     }
+    // Call Cli, arguments: path and options
     cli(data);
   });
 } else {
-  // We have Path, now Check options
+  // mg-links <path> options : Receive path and options in 1 line
+  // used commander and program
+  // capture options
   program
     .option("-v, --validate", "Validate Links")
     .option("-s, --stats", "Stats")
     .option("-s -v,  --stats --validate", "Validate Links and Stats");
+  // Print results of commands for use
   program.parse(process.argv);
+  // process.argv [
+  //   'C:\\Program Files\\nodejs\\node.exe',
+  //   'C:\\Users\\maria\\AppData\\Roaming\\npm\\node_modules\\mg-links\\index.js',
+  //   'C:/www/LIM016-md-links/src/some/some1/example3.md'
+  // ]
 
   let options = program.opts();
+  // options { validate: true } // return true with -v or --validate
+  // mg-links C:/www/LIM016-md-links/src/some/some1/example3.md -v
 
   //Don't have options
   if (Object.keys(options).length === 0) {

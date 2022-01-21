@@ -108,6 +108,7 @@ const mdLinks = (pathData, optionsData) => {
     if (flagContent === "directory") {
       readDirectoriesRecursive(pathResolve, readAllFilesMD);
       function readAllFilesMD(files) {
+        // console.log('files:', files);
         const conditionFilesMD = files.filter((file) => extMD(file));
         const existFilesMD =
           conditionFilesMD.length > 0
