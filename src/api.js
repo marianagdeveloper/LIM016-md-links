@@ -11,6 +11,7 @@ import {
 } from "./utils.js";
 
 function linksWithOptionValidate(link, routeFileMD) {
+  // console.log('link:', link);
   return new Promise(function (resolve, reject) {
     statusHttp(link.href, resultStatusHttp);
     function resultStatusHttp(statusData) {
@@ -23,6 +24,7 @@ function linksWithOptionValidate(link, routeFileMD) {
         status: statusData,
         ok: messageOk,
       });
+      // console.log('arrayLinks:', arrayLinks);
       resolve(arrayLinks);
     }
   });
@@ -51,7 +53,7 @@ function fileToLinks(data, routeFileMD, optionsData) {
           return resolve(arrayLinks);
         }
       });
-      // Ready foreach
+      // Ready foreach links
       Promise.all([...promises]).then((result) => {
         let todoLinks = [];
         result.forEach((promise) => {

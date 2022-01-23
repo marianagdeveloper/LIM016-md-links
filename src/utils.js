@@ -6,12 +6,16 @@ import dir from "node-dir";
 import fetch from "node-fetch";
 var md = new Remarkable();
 
-// Uniques Links
+// PENDING TESTED :Uniques Links
 const onlyUnique = (value, index, self) => {
+  // console.log('VALUE', value);
+  // console.log('INDEX', index);
+  // console.log('SELF', self);
+  // console.log('resultado:', self.indexOf(value) === index);
   return self.indexOf(value) === index;
 }
 
-// HTTP status
+// TESTED :HTTP status
 const statusHttp = (link, callback) => {
   let status;
   fetch(link)
@@ -25,7 +29,7 @@ const statusHttp = (link, callback) => {
     });
 };
 
-// Reading directory recursive
+// TESTED :Reading directory recursive
 const readDirectoriesRecursive = (directory, allFilesMD) => {
   dir.files(directory, function (err, files) {
     if (err) throw err;
@@ -48,15 +52,17 @@ const pathDetails = (pathData) => {
   return path.parse(pathData);
 };
 
-// Convert file in HTML
+// PENDING TESTED : Convert file in HTML
 const fileConvertedInHTML = (data) => {
   return md.render(data);
 };
 
-// Search links
+// PENDING TESTED :Search links
 const linksInFile = (dataHTML) => {
+  // console.log('dataHTML', dataHTML)
   const dom = new JSDOM(dataHTML);
   const hrefData = dom.window.document.querySelectorAll("a");
+  // console.log('linksInFile:',hrefData[0].textContent);
   return hrefData;
 };
 

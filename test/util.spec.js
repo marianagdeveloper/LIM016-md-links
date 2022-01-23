@@ -5,6 +5,10 @@ import {
   readFileData,
   pathDetails,
   readDirectoriesRecursive,
+  fileConvertedInHTML,
+  linksInFile,
+  onlyUnique,
+  statusHttp
 } from '../src/utils';
 
 const absolutePathData = 'C:/www/LIM016-md-links/src/some/some1/example3.md'
@@ -19,13 +23,12 @@ const pathDetailsData = {
   ext: '.md',
   name: 'example3'
 }
-const pathDirectoryRecursiveData = 'C:/www/LIM016-md-links/src/some/some1'
+const pathDirectoryRecursiveData = 'C:/www/LIM016-md-links/src/some/some2'
 const readDirectoriesRecursiveData = [
-  'C:\\www\\LIM016-md-links\\src\\some\\some1\\example3.md',
-  'C:\\www\\LIM016-md-links\\src\\some\\some1\\example4.md',
-  'C:\\www\\LIM016-md-links\\src\\some\\some1\\example5.md'
+  "C:\\www\\LIM016-md-links\\src\\some\\some2\\example3.md",
 ];
-const fileMarkdown = 'C:/www/LIM016-md-links/src/some/some1/example3.md'
+const fileMarkdown = '[Node.js](https://nodejs.org/es/) es un entorno de ejecución para JavaScript.\r\n'
+
 
 describe('absolutePath', () => {
   it('return true if path is absolute', () => {
@@ -55,7 +58,7 @@ describe('absolutePathResolve', () => {
 describe('readFileData', () => {
   it('if function callback printfile receive file from readFile', (done) => {
     function callback(data) {
-      expect(data).toBe('[Node.js](https://nodejs.org/es/) es un entorno de ejecución para JavaScript.\r\n')
+      expect(data).toBe(fileMarkdown)
       done();
     }
     readFileData(absolutePathData, callback);
@@ -68,15 +71,59 @@ describe('pathDetails', () => {
   });
  });
 
- // describe.only and fit en vez de it me permite solo testear esa funcion
-describe.only('readDirectoriesRecursive', (done) => {
-  fit('if function callback allFilesMD receive only files .md from a directory', (done) => {
+describe('readDirectoriesRecursive', () => {
+  it('if function callback allFilesMD receive files from a directory', (done) => {
     function callback(data) {
       // console.log(data);
       expect(data).toEqual(readDirectoriesRecursiveData)
       done();
     }
     readDirectoriesRecursive(pathDirectoryRecursiveData, callback);
+  });
+});
+
+// PENDING
+describe('fileConvertedInHTML', () => {
+  it('return file Markdonw converted in HTML', () => {
+    const result = fileConvertedInHTML(fileMarkdown)
+    // console.log(result.toString());
+    // expect(result.toString()).toEqual(fileHTML)
+  });
+ });
+
+ // PENDING
+describe('linksInFile', () => {
+  it('return file Markdonw converted in HTML', () => {
+    const result = linksInFile(`[Node.js](https://nodejs.org/es/) es un entorno de ejecución para JavaScript.`)
+    // console.log(result.toString());
+    // const resultado = result[0].textContent;
+    // expect(resultado).toEqual('Node.js')
+  });
+ });
+
+ // PENDING
+ describe('onlyUnique', () => {
+  it('unique link', () => {
+    const link = onlyUnique('https://nodejs.org/es/',0,['href: https://nodejs.org/es/'])
+    // expect(link).toBe(true);
+  });
+  // it('return false if path is not absolute', () => {
+  //   expect(absolutePath(relativePathData)).toBe(false);
+  // });
+});
+
+describe('statusHttp', () => {
+  it('return status http 200', () => {
+    function callback(data) {
+      if (data == 200) {
+        expect(data).toBe(200)
+        done();
+      } else {
+        expect(data).toBe(404)
+        done();
+      }
+    }
+    statusHttp(absolutePathData, callback);
   });
 });
 
