@@ -109,7 +109,7 @@ describe('linksInFile', () => {
   });
  });
 
- // PENDING
+ // TESTED
  describe('onlyUnique', () => {
   it('unique link', () => {
     let link = onlyUnique('https://nodejs.org/es/',0,['https://nodejs.org/es/'])
