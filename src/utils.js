@@ -66,7 +66,11 @@ const linksInFile = (dataHTML) => {
 // TESTED : Read file
 const readFileData = (url, printFile) => {
   readFile(url, "utf8", (err, data) => {
-    if (err) throw err.code;
+
+    if (err) {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      throw err;
+    }
     printFile(data);
   });
 };

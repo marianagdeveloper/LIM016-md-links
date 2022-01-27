@@ -56,7 +56,7 @@ describe('absolutePathResolve', () => {
 });
 
 // describe.only and fit en vez de it me permite solo testear esa funcion
-describe('readFileData', () => {
+describe.only('readFileData', () => {
   it('if function callback printfile receive file from readFile', () => {
     function callback(data) {
       expect(data).toBe(fileMarkdown)
@@ -64,13 +64,13 @@ describe('readFileData', () => {
     }
     readFileData(absolutePathData, callback);
   });
-  // it('error readFile', () => {
-  //   function callback(error1) {
-  //     const errorENOENT = 'ENOENT'
-  //     // expect(error1).toBe(errorENOENT)
-  //   }
-  //   readFileData(errorPathData, callback);
-  // });
+  it.only('error readFile', () => {
+    function callback(error1) {
+    }
+    expect(() => {
+      readFileData('jjjjjjjjjj.md', callback);
+    }).toThrow();
+  });
 });
 
 describe('pathDetails', () => {
@@ -110,10 +110,18 @@ describe('linksInFile', () => {
  });
 
  // PENDING
- describe.only('onlyUnique', () => {
-  it.only('unique link', () => {
-    const link = onlyUnique('https://nodejs.org/es/',0,['href: https://nodejs.org/es/'])
+ describe('onlyUnique', () => {
+  it('unique link', () => {
+    let link = onlyUnique('https://nodejs.org/es/',0,['https://nodejs.org/es/'])
     expect(link).toBe(true);
+    link = onlyUnique('https://nodejs.org/es/',1,['https://nodejs.org/es/'])
+    expect(link).toBe(false);
+  });
+  it('unique link', () => {
+    // const link = onlyUnique('https://nodejs.org/es/', ['https://nodejs.org/es/', 'https://nodejs.org/es/'])
+    const result = ['https://nodejs.org/es/', 'https://nodejs.org/es/'].filter(onlyUnique);
+
+    expect(result).toEqual(['https://nodejs.org/es/']);
   });
   // it('return false if path is not absolute', () => {
   //   expect(absolutePath(relativePathData)).toBe(false);
