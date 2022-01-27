@@ -64,12 +64,14 @@ describe.only('readFileData', () => {
     }
     readFileData(absolutePathData, callback);
   });
-  it.only('error readFile', () => {
-    function callback(error1) {
+  it.only('error readFile', (done) => {
+    expect.assertions(1);
+    try {
+      readFileData('jjjjjjjjjj.md');
+    } catch(e) {
+      expect(e.code).toBe('ENOENT')
+      done()
     }
-    expect(() => {
-      readFileData('jjjjjjjjjj.md', callback);
-    }).toThrow();
   });
 });
 
@@ -91,8 +93,8 @@ describe('readDirectoriesRecursive', () => {
 });
 
 // tested
-describe.only('fileConvertedInHTML', () => {
-  fit('return file Markdonw converted in HTML', () => {
+describe('fileConvertedInHTML', () => {
+  it('return file Markdonw converted in HTML', () => {
     const result = fileConvertedInHTML(fileMarkdown)
     // console.log(result.toString());
     expect(result.toString().trim()).toEqual(fileHTML.trim())
