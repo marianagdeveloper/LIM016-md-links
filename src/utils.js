@@ -6,12 +6,8 @@ import dir from "node-dir";
 import fetch from "node-fetch";
 var md = new Remarkable();
 
-// PENDING TESTED :Uniques Links
+// P TESTED :Uniques Links
 const onlyUnique = (value, index, self) => {
-  // console.log('VALUE', value);
-  // console.log('INDEX', index);
-  // console.log('SELF', self);
-  // console.log('resultado:', self.indexOf(value) === index);
   return self.indexOf(value) === index;
 }
 
@@ -37,7 +33,8 @@ const readDirectoriesRecursive = (directory, allFilesMD) => {
   });
 };
 
-// TESTED :Absolute route
+
+// TESTED :Absolute route?
 const absolutePath = (pathData) => {
   return path.isAbsolute(pathData);
 };
@@ -52,12 +49,12 @@ const pathDetails = (pathData) => {
   return path.parse(pathData);
 };
 
-// PENDING TESTED : Convert file in HTML
+// P TESTED : Convert file in HTML
 const fileConvertedInHTML = (data) => {
   return md.render(data);
 };
 
-// PENDING TESTED :Search links
+// P TESTED :Search links
 const linksInFile = (dataHTML) => {
   // console.log('dataHTML', dataHTML)
   const dom = new JSDOM(dataHTML);
@@ -69,7 +66,7 @@ const linksInFile = (dataHTML) => {
 // TESTED : Read file
 const readFileData = (url, printFile) => {
   readFile(url, "utf8", (err, data) => {
-    if (err) throw err;
+    if (err) throw err.code;
     printFile(data);
   });
 };

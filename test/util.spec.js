@@ -11,7 +11,9 @@ import {
   statusHttp
 } from '../src/utils';
 
+const fileHTML = '<p><a href="https://nodejs.org/es/">Node.js</a> es un entorno de ejecución para JavaScript.</p>';
 const absolutePathData = 'C:/www/LIM016-md-links/src/some/some1/example3.md'
+const errorPathData = 'C:/www/LIM016-md-links/src/some/some1/example8.md'
 const relativePathData = './src/some/example2.md'
 const pathRelativeToAbsolute = "C:\\www\\LIM016-md-links\\src\\some\\example2.md"
 const extMDData = 'example2.md'
@@ -28,7 +30,6 @@ const readDirectoriesRecursiveData = [
   "C:\\www\\LIM016-md-links\\src\\some\\some2\\example3.md",
 ];
 const fileMarkdown = '[Node.js](https://nodejs.org/es/) es un entorno de ejecución para JavaScript.\r\n'
-
 
 describe('absolutePath', () => {
   it('return true if path is absolute', () => {
@@ -56,13 +57,20 @@ describe('absolutePathResolve', () => {
 
 // describe.only and fit en vez de it me permite solo testear esa funcion
 describe('readFileData', () => {
-  it('if function callback printfile receive file from readFile', (done) => {
+  it('if function callback printfile receive file from readFile', () => {
     function callback(data) {
       expect(data).toBe(fileMarkdown)
-      done();
+      // done();
     }
     readFileData(absolutePathData, callback);
   });
+  // it('error readFile', () => {
+  //   function callback(error1) {
+  //     const errorENOENT = 'ENOENT'
+  //     // expect(error1).toBe(errorENOENT)
+  //   }
+  //   readFileData(errorPathData, callback);
+  // });
 });
 
 describe('pathDetails', () => {
@@ -72,22 +80,22 @@ describe('pathDetails', () => {
  });
 
 describe('readDirectoriesRecursive', () => {
-  it('if function callback allFilesMD receive files from a directory', (done) => {
+  it('if function callback allFilesMD receive files from a directory', () => {
     function callback(data) {
       // console.log(data);
       expect(data).toEqual(readDirectoriesRecursiveData)
-      done();
+      // done();
     }
     readDirectoriesRecursive(pathDirectoryRecursiveData, callback);
   });
 });
 
-// PENDING
-describe('fileConvertedInHTML', () => {
-  it('return file Markdonw converted in HTML', () => {
+// tested
+describe.only('fileConvertedInHTML', () => {
+  fit('return file Markdonw converted in HTML', () => {
     const result = fileConvertedInHTML(fileMarkdown)
     // console.log(result.toString());
-    // expect(result.toString()).toEqual(fileHTML)
+    expect(result.toString().trim()).toEqual(fileHTML.trim())
   });
  });
 
@@ -102,10 +110,10 @@ describe('linksInFile', () => {
  });
 
  // PENDING
- describe('onlyUnique', () => {
-  it('unique link', () => {
+ describe.only('onlyUnique', () => {
+  it.only('unique link', () => {
     const link = onlyUnique('https://nodejs.org/es/',0,['href: https://nodejs.org/es/'])
-    // expect(link).toBe(true);
+    expect(link).toBe(true);
   });
   // it('return false if path is not absolute', () => {
   //   expect(absolutePath(relativePathData)).toBe(false);
