@@ -71,7 +71,7 @@ const readFileData = (url, printFile) => {
   //   }
   //   printFile(data);
   // });
-  const data = readFileSync(url);
+  const data = readFileSync(url, "utf8");
   printFile(data);
 };
 

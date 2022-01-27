@@ -56,7 +56,7 @@ describe('absolutePathResolve', () => {
 });
 
 // describe.only and fit en vez de it me permite solo testear esa funcion
-describe.only('readFileData', () => {
+describe('readFileData', () => {
   it('if function callback printfile receive file from readFile', () => {
     function callback(data) {
       expect(data).toBe(fileMarkdown)
@@ -64,7 +64,7 @@ describe.only('readFileData', () => {
     }
     readFileData(absolutePathData, callback);
   });
-  it.only('error readFile', (done) => {
+  it('error readFile', (done) => {
     expect.assertions(1);
     try {
       readFileData('jjjjjjjjjj.md');
