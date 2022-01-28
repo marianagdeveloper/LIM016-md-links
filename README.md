@@ -27,31 +27,37 @@ You can run the library through the terminal:
 mg-links <path-to-file> [options]
 ```
 
-The paths entered can be **relative** or **absolute** and the options you can use are: `--help  -h`, `--stats  -s`, `--validate  -v`, or use both together `--stats --validate   -s -v`.
+The paths entered can be **relative** or **absolute** and the options you can use are: `--help or -h`, `--stats or -s`, `--validate or -v`, or use both together `--stats --validate  or -s -v`.
 
-Case 1: `mg-links <path-to-file>`
+### Case 1: `mg-links <path-to-file>`
 
 ![case1](https://user-images.githubusercontent.com/74887104/151602513-e840e3ad-eca2-488b-8ee5-15bae39fa3f7.png)
 
-Case 2: `mg-links <path-to-file> --validate`
+
+### Case 2: `mg-links <path-to-file> --validate`
 
 ![case2](https://user-images.githubusercontent.com/74887104/151602746-8e0db320-287c-4c3e-b1ff-cc9735807a95.jpg)
 
-Case 3: `mg-links <path-to-file> --stats`
+
+### Case 3: `mg-links <path-to-file> --stats`
 
 ![case3](https://user-images.githubusercontent.com/74887104/151602905-af398617-1dc1-465a-88f0-8023c8768cc3.jpg)
 
-Case 4: `mg-links <path-to-file> --stats --validate` or `md-links <path-to-file> --validate --stats`
+
+### Case 4: `mg-links <path-to-file> --stats --validate` or `md-links <path-to-file> --validate --stats`
 
 ![case4](https://user-images.githubusercontent.com/74887104/151603035-603e5f5a-4862-41bd-87cd-85d8a0e3355f.jpg)
 
-Case 5: `mg-links --help`
+
+### Case 5: `mg-links --help`
 
 ![case5](https://user-images.githubusercontent.com/74887104/151603205-f727b7dc-3cf9-4cc7-a95a-77a59525b5fb.jpg)
 
-Case 6: When information is omitted or incorrect
+
+### Case 6: When information is omitted or incorrect
 
 ![case6](https://user-images.githubusercontent.com/74887104/151603979-3ca3768d-e3e4-43dc-9182-4c083df009da.jpg)
+
 
 ## Flowcharts
 
