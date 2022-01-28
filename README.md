@@ -5,9 +5,6 @@
 
 It is a library that allows you to validate URLs inside markdown files. It will allow you to obtain: link status, total links, unique links and broken links.
 
-## Author ✒️
-[Mariana Guanda](https://github.com/marianagdeveloper)
-
 ***
 ## Getting started 🚀
 These instructions will allow you to install the library on your local machine for development.
@@ -75,7 +72,12 @@ CLI-flowchart
 
 ![Flowchart CLI MDLINKS](https://user-images.githubusercontent.com/74887104/151604440-b2386c38-7d0e-427c-aadf-e4b1a6a4f6af.jpg)
 
+***
+## Test ✅
 
+![test](https://user-images.githubusercontent.com/74887104/151613263-b60c3012-96c4-41b5-8255-a93d9af7919a.jpg)
+
+***
 ## Built with 🛠️
 * [Node.js](https://nodejs.org/en/) - Used to create the library
 * [NPM](https://www.npmjs.com/) - Manage packages
@@ -83,4 +85,7 @@ CLI-flowchart
 * [Chalk](https://github.com/chalk/chalk) - Used to style terminal output
 * [CommonJS](https://nodejs.org/docs/latest/api/modules.html#modules-commonjs-modules) - Handle modules
 * [node-fetch](https://www.npmjs.com/package/node-fetch) - Make HTTP calls
+* [Jest](https://jestjs.io/docs/jest-platform) - Testing
 
+## Author ✒️
+[Mariana Guanda](https://github.com/marianagdeveloper)
