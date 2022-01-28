@@ -1,6 +1,4 @@
 
-# LIBRARY MG - LINKS 📊
-
 ![mglinks_logo](https://user-images.githubusercontent.com/74887104/151617963-77688102-934c-4cfc-b051-a24e9c8f9f4b.png)
 
 It is a library that allows you to validate URLs inside markdown files. It will allow you to obtain: link status, total links, unique links and broken links.
