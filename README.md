@@ -60,6 +60,11 @@ The paths entered can be **relative** or **absolute** and the options you can us
 ![case6](https://user-images.githubusercontent.com/74887104/151603979-3ca3768d-e3e4-43dc-9182-4c083df009da.jpg)
 
 ***
+### Case 7:  `mg-links <path-to-directory>`
+
+![case7](https://user-images.githubusercontent.com/74887104/151612350-e37d2414-9048-43d3-b2ec-b9c22d39c6cf.jpg)
+
+***
 ## Flowcharts
 
 API-flowchart
