@@ -6,7 +6,7 @@ import dir from "node-dir";
 import fetch from "node-fetch";
 var md = new Remarkable();
 
-// P TESTED :Uniques Links
+// TESTED :Uniques Links
 const onlyUnique = (value, index, self) => {
   return self.indexOf(value) === index;
 }
@@ -28,8 +28,12 @@ const statusHttp = (link, callback) => {
 // TESTED :Reading directory recursive
 const readDirectoriesRecursive = (directory, allFilesMD) => {
   dir.files(directory, function (err, files) {
-    if (err) throw err;
-    allFilesMD(files.filter((file) => extMD(file)));
+    // if (err) throw err;
+    if (err) {
+      allFilesMD(err)
+    } else {
+      allFilesMD(files.filter((file) => extMD(file)));
+    }
   });
 };
 
@@ -54,12 +58,10 @@ const fileConvertedInHTML = (data) => {
   return md.render(data);
 };
 
-// P TESTED :Search links
+// TESTED :Search links
 const linksInFile = (dataHTML) => {
-  // console.log('dataHTML', dataHTML)
   const dom = new JSDOM(dataHTML);
   const hrefData = dom.window.document.querySelectorAll("a");
-  // console.log('linksInFile:',hrefData[0].textContent);
   return hrefData;
 };
 

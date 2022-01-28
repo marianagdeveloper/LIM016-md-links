@@ -2,6 +2,7 @@
 import { mdLinks } from '../src/api.js'
 
 const absolutePathData = 'C:/www/LIM016-md-links/src/some/some1/example3.md'
+const pathWithoutLinks = 'C:/www/LIM016-md-links/src/some/some1/example4.md'
 const pathError = 'C:/www/LIM016-md-links/src/some/some1/example.md'
 const absolutePathDataDirectory = 'C:/www/LIM016-md-links/src/some/some2'
 const mdlinksValidateTrue = [
@@ -38,6 +39,12 @@ describe('mdLinks', () => {
     return mdLinks(absolutePathData, {validate: false})
       .then((res) => {
         expect(res).toEqual(mdlinksValidateFalse);
+      })
+  });
+  it('return objects array []', () => {
+    return mdLinks(pathWithoutLinks, {validate: false})
+      .then((res) => {
+        expect(res).toEqual([]);
       })
   });
   // it('return error', () => {

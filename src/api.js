@@ -110,38 +110,42 @@ const mdLinks = (pathData, optionsData) => {
     if (flagContent === "directory") {
       readDirectoriesRecursive(pathResolve, readAllFilesMD);
       function readAllFilesMD(files) {
-        // console.log('files:', files);
-        const conditionFilesMD = files.filter((file) => extMD(file));
-        const existFilesMD =
-          conditionFilesMD.length > 0
-            ? conditionFilesMD
-            : "Do not exist MD file in this directory";
+        if (files.code == 'ENOENT') {
+          return reject(console.log("Do not exist this directory"))
+        } else {
+          const conditionFilesMD = files.filter((file) => extMD(file));
+          const existFilesMD =
+            conditionFilesMD.length > 0
+              ? conditionFilesMD
+              : "Do not exist MD file in this directory";
 
-        for (let index = 0; index < existFilesMD.length; index++) {
-          const fileMD = existFilesMD[index];
-          const routeFileMD = fileMD;
-          arrayPromises[index] = new Promise(function (resolve, reject) {
-            readFileData(routeFileMD, (data) => {
-              resolve(
-                fileToLinks(
-                  data,
-                  routeFileMD,
-                  optionsData || { validate: false }
-                )
-              );
+          for (let index = 0; index < existFilesMD.length; index++) {
+            const fileMD = existFilesMD[index];
+            const routeFileMD = fileMD;
+            arrayPromises[index] = new Promise(function (resolve, reject) {
+              readFileData(routeFileMD, (data) => {
+                resolve(
+                  fileToLinks(
+                    data,
+                    routeFileMD,
+                    optionsData || { validate: false }
+                  )
+                );
+              });
             });
+          }
+
+          Promise.all([...arrayPromises]).then((resolvePromises) => {
+            let todoLinks = [];
+            resolvePromises.forEach((promise) => {
+              promise.forEach((link) => {
+                todoLinks.push(link);
+              });
+            });
+            resolve(todoLinks);
           });
         }
 
-        Promise.all([...arrayPromises]).then((resolvePromises) => {
-          let todoLinks = [];
-          resolvePromises.forEach((promise) => {
-            promise.forEach((link) => {
-              todoLinks.push(link);
-            });
-          });
-          resolve(todoLinks);
-        });
       }
     }
   });
