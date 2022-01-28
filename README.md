@@ -12,12 +12,13 @@ See Deployment for the library developed with Node.js.
 Installation 🔧
 You can install it by npm:
 
-El módulo debe poder **importarse** en otros scripts de Node.js y debe ofrecer la
-siguiente interfaz:
+```js
+$ npm i mg-links
+```
 
 
 #### `mdLinks(path, options)`
-#### `$ npm i mg-links`
+
 
 ##### Argumentos
 
