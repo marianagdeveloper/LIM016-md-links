@@ -35,12 +35,24 @@ describe('mdLinks', () => {
   it('it is a function', () => {
     expect(typeof mdLinks).toBe('function');
   });
+
+  // it.only('return path invalid', (done) => {
+  //   return mdLinks('', {validate: false})
+  //     .then((res) => {
+  //       console.log(res);
+  //       const texto = console.log('Path Invalid !!!');
+  //       expect(res).toBe(texto);
+  //       done()
+  //     })
+  // });
+
   it('return objects array [{href, text, file}]', () => {
     return mdLinks(absolutePathData, {validate: false})
       .then((res) => {
         expect(res).toEqual(mdlinksValidateFalse);
       })
   });
+
   it('return objects array []', () => {
     return mdLinks(pathWithoutLinks, {validate: false})
       .then((res) => {
@@ -60,6 +72,7 @@ describe('mdLinks', () => {
         expect(res).toEqual(mdlinksValidateTrue);
       })
   });
+
   it('return objects array with http status [{href, text, file, status, statusText}] from directory', () => {
     return mdLinks(absolutePathDataDirectory, {validate: true})
       .then((res) => {

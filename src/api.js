@@ -73,7 +73,7 @@ function fileToLinks(data, routeFileMD, optionsData) {
 const mdLinks = (pathData, optionsData) => {
   return new Promise(function (resolve, reject) {
     if (pathData == undefined || pathData == "") {
-      return console.log('Path Invalid !!!');;
+      return console.log('Path Invalid !!!');
     }
     let arrayPromises = [];
     let flagContent = "";
